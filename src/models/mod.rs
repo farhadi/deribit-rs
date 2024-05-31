@@ -99,15 +99,11 @@ impl std::str::FromStr for Currency {
 }
 
 #[derive(Deserialize, Serialize, Debug, Clone, Copy, PartialEq)]
-#[serde(rename_all = "lowercase")]
+#[serde(rename_all = "snake_case")]
 pub enum AssetKind {
-    #[serde(alias = "future")]
     Future,
-    #[serde(alias = "future_combo")]
     FutureCombo,
-    #[serde(alias = "option")]
     Option,
-    #[serde(alias = "option_combo")]
     OptionCombo,
 }
 
@@ -191,10 +187,36 @@ pub enum OrderState {
 }
 
 #[derive(Deserialize, Serialize, Debug, Clone, Copy, PartialEq)]
+#[serde(rename_all = "snake_case")]
+pub enum CancelReason {
+    UserRequest,
+    Autoliquidation,
+    CancelOnDisconnect,
+    RiskMitigation,
+    PmeRiskReduction,
+    PmeAccountLocked,
+    PositionLocked,
+    MmpTrigger,
+    MmpConfigCurtailment,
+    EditPostOnlyReject,
+    Settlement,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone, Copy, PartialEq)]
 #[serde(rename_all = "lowercase")]
 pub enum OrderBookState {
     Open,
     Closed,
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone, Copy, PartialEq)]
+#[serde(rename_all = "lowercase")]
+pub enum ComboState {
+    Rfq,
+    Active,
+    Inactive,
+    Closed,
+    Archivized,
 }
 
 #[derive(Deserialize, Serialize, Debug, Clone, Copy, PartialEq)]

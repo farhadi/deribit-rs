@@ -5,6 +5,8 @@ use crate::models::{
 use serde::{Deserialize, Deserializer, Serialize};
 use shrinkwraprs::Shrinkwrap;
 
+use super::CancelReason;
+
 #[derive(Deserialize, Serialize, Debug, Clone, Shrinkwrap)]
 #[shrinkwrap(mutable)]
 pub struct BuyRequest(pub TradeRequest);
@@ -247,30 +249,49 @@ pub struct Order {
     pub advanced: Option<AdvanceOption>,
     pub amount: f64,
     pub api: bool,
+    pub app_name: Option<String>,
+    pub auto_replaced: Option<bool>,
     pub average_price: Option<f64>,
+    pub block_trade: Option<bool>,
+    pub cancel_reason: Option<CancelReason>,
     pub commission: Option<f64>,
+    pub contracts: Option<f64>,
     pub creation_timestamp: u64,
     pub direction: Direction,
     pub filled_amount: Option<f64>,
     pub implv: Option<f64>,
     pub instrument_name: String,
-    pub is_liquidation: bool,
+    pub is_liquidation: Option<bool>,
     pub label: Option<String>,
     pub last_update_timestamp: u64,
     pub max_show: f64,
+    pub mmp: bool,
+    pub mmp_cancelled: Option<bool>,
+    pub mmp_group: Option<String>,
+    pub mobile: Option<bool>,
+    pub original_order_type: Option<OrderType>,
     pub order_id: String,
     pub order_state: OrderState,
     pub order_type: OrderType,
     pub post_only: bool,
     #[serde(deserialize_with = "deserialize_price")]
     pub price: Option<f64>, // None for stop_market
-    pub profit_loss: f64,
-    pub reduce_only: bool,
+    pub quote: Option<bool>,
+    pub quote_id: Option<String>,
+    pub reduce_only: Option<bool>,
+    pub reject_post_only: Option<bool>,
+    pub replaced: bool,
+    pub risk_reducing: bool,
     pub stop_price: Option<f64>,
     pub time_in_force: TimeInForce,
     pub trigger: Option<Trigger>,
     pub triggered: Option<bool>,
+    pub trigger_price: Option<f64>,
+    pub trigger_offset: Option<f64>,
+    pub trigger_order_id: Option<String>,
+    pub trigger_reference_price: Option<f64>,
     pub usd: Option<f64>,
+    pub web: bool,
 }
 
 fn deserialize_price<'de, D>(de: D) -> Result<Option<f64>, D::Error>

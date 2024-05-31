@@ -1,4 +1,4 @@
-use crate::models::OrderBookState;
+use crate::models::{OrderBookState, ComboState};
 use fehler::throw;
 use serde::{
     de::{Error, Unexpected},
@@ -13,12 +13,14 @@ pub struct TickerData {
     pub ask_iv: Option<f64>,
     pub best_ask_amount: f64,
     pub best_ask_price: Option<f64>,
+    pub implied_ask: Option<f64>,
     pub best_bid_amount: f64,
     pub best_bid_price: Option<f64>,
+    pub implied_bid: Option<f64>,
     pub bid_iv: Option<f64>,
     pub current_funding: Option<f64>,
     pub delivery_price: Option<f64>,
-    pub estimated_delivery_price: f64,
+    pub estimated_delivery_price: Option<f64>,
     pub funding_8h: Option<f64>,
     pub greeks: Option<Greeks>,
     pub index_price: f64,
@@ -29,8 +31,9 @@ pub struct TickerData {
     pub mark_price: f64,
     pub max_price: f64,
     pub min_price: f64,
-    pub open_interest: f64,
+    pub open_interest: Option<f64>,
     pub settlement_price: Option<f64>,
+    pub combo_state: Option<ComboState>,
     pub state: OrderBookState,
     pub stats: Stats,
     pub timestamp: u64,
@@ -53,6 +56,7 @@ pub struct Stats {
     pub low: Option<f64>,
     pub volume: Option<f64>,
     pub volume_usd: Option<f64>,
+    pub volume_notional: Option<f64>,
     pub price_change: Option<f64>,
 }
 

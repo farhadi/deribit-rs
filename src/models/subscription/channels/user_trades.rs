@@ -8,6 +8,9 @@ use serde::{
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct UserTradesData {
     pub amount: f64,
+    pub api: bool,
+    pub combo_id: Option<String>,
+    pub contracts: Option<f64>,
     pub direction: Direction,
     pub fee: f64,
     pub fee_currency: Currency,
@@ -19,18 +22,20 @@ pub struct UserTradesData {
     pub liquidation: Option<LiquidationType>,
     pub mark_price: Option<f64>,
     pub matching_id: Option<String>,
+    pub mmp: bool,
     pub order_id: String,
     pub order_type: OrderType,
     pub original_order_type: Option<String>,
     pub price: f64,
-    pub profit_loss: f64,
+    pub profit_loss: Option<f64>,
+    pub reduce_only: Option<bool>,
+    pub risk_reducing: Option<bool>,
     pub self_trade: bool,
     pub state: OrderState,
     pub tick_direction: i64,
     pub timestamp: u64,
     pub trade_id: String,
     pub trade_seq: i64,
-    pub reduce_only: bool,
     pub post_only: bool,
 }
 
